@@ -1,0 +1,148 @@
+<div>
+  <h2 id="page-heading" data-cy="ReceiptHeading">
+    <span>Receipts</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-receipt"
+        [routerLink]="['/receipt/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Receipt </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="receipts?.length === 0">
+    <span>No receipts found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="receipts && receipts.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="status"><span>Status</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="created"><span>Created</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="orderId"><span>Order Id</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="price"><span>Price</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="tiskelCorporateId"><span>Tiskel Corporate Id</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="tiskelLicenseId"><span>Tiskel License Id</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="taxiNumber"><span>Taxi Number</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="driverId"><span>Driver Id</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="customerId"><span>Customer Id</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="customerPhoneNumber"><span>Customer Phone Number</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="customerEmail"><span>Customer Email</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="emailSentStatus"><span>Email Sent Status</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="deliveryType"><span>Delivery Type</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="printerType"><span>Printer Type</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="jsonData"><span>Json Data</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="printData"><span>Print Data</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="jwtData"><span>Jwt Data</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="errorMessage"><span>Error Message</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="company.id"><span>Company</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="cashRegister.id"><span>Cash Register</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="terminal.id"><span>Terminal</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let receipt of receipts; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/receipt', receipt.id, 'view']">{{ receipt.id }}</a>
+          </td>
+          <td>{{ receipt.status }}</td>
+          <td>{{ receipt.created | formatMediumDatetime }}</td>
+          <td>{{ receipt.orderId }}</td>
+          <td>{{ receipt.price }}</td>
+          <td>{{ receipt.tiskelCorporateId }}</td>
+          <td>{{ receipt.tiskelLicenseId }}</td>
+          <td>{{ receipt.taxiNumber }}</td>
+          <td>{{ receipt.driverId }}</td>
+          <td>{{ receipt.customerId }}</td>
+          <td>{{ receipt.customerPhoneNumber }}</td>
+          <td>{{ receipt.customerEmail }}</td>
+          <td>{{ receipt.emailSentStatus }}</td>
+          <td>{{ receipt.deliveryType }}</td>
+          <td>{{ receipt.printerType }}</td>
+          <td>{{ receipt.jsonData }}</td>
+          <td>{{ receipt.printData }}</td>
+          <td>{{ receipt.jwtData }}</td>
+          <td>{{ receipt.errorMessage }}</td>
+          <td>
+            <div *ngIf="receipt.company">
+              <a [routerLink]="['/company', receipt.company?.id, 'view']">{{ receipt.company?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="receipt.cashRegister">
+              <a [routerLink]="['/cash-register', receipt.cashRegister?.id, 'view']">{{ receipt.cashRegister?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="receipt.terminal">
+              <a [routerLink]="['/terminal', receipt.terminal?.id, 'view']">{{ receipt.terminal?.id }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/receipt', receipt.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/receipt', receipt.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(receipt)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="receipts && receipts.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

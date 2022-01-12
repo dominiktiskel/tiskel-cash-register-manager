@@ -1,0 +1,60 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="payment">
+      <h2 data-cy="paymentDetailsHeading"><span>Payment</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ payment.id }}</span>
+        </dd>
+        <dt><span>Created</span></dt>
+        <dd>
+          <span>{{ payment.created | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Status</span></dt>
+        <dd>
+          <span>{{ payment.status }}</span>
+        </dd>
+        <dt><span>Type</span></dt>
+        <dd>
+          <span>{{ payment.type }}</span>
+        </dd>
+        <dt><span>Is Subscription Renewal</span></dt>
+        <dd>
+          <span>{{ payment.isSubscriptionRenewal }}</span>
+        </dd>
+        <dt><span>Error Message</span></dt>
+        <dd>
+          <span>{{ payment.errorMessage }}</span>
+        </dd>
+        <dt><span>Company</span></dt>
+        <dd>
+          <div *ngIf="payment.company">
+            <a [routerLink]="['/company', payment.company?.id, 'view']">{{ payment.company?.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Invoice</span></dt>
+        <dd>
+          <div *ngIf="payment.invoice">
+            <a [routerLink]="['/invoice', payment.invoice?.id, 'view']">{{ payment.invoice?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/payment', payment.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+id;created;payed_by;payed_to_date;number;name;description;subscription_renewal_enabled;subscription_renewal_trial_count;subscription_period;active;error_message;company_id
+1;2022-01-12T02:44:15;TAXI;2022-01-11T21:14:24;20109;1080p optical;protocol bandwidth;true;82089;WEEK;false;middleware Principal Lao;1
+2;2022-01-11T15:31:29;TAXI;2022-01-12T05:33:57;14261;Somalia Tennessee orange;e-business Hong International;false;12625;YEAR;true;EXE deploy Krone;2
+3;2022-01-12T02:13:31;TAXI;2022-01-12T05:51:10;73050;payment Soft Ergonomic;National Accounts;true;1554;WEEK;true;infrastructure;3
+4;2022-01-12T01:31:22;TAXI;2022-01-12T04:13:07;78709;digital;PNG;false;39982;MONTH;true;Incredible;4
+5;2022-01-12T04:52:55;TAXI;2022-01-12T07:17:20;93294;National navigating XSS;ROI Investor;false;1136;WEEK;false;salmon matrices tangible;5
+6;2022-01-12T00:41:20;TAXI;2022-01-12T01:33:21;58311;transitional;parsing Wooden;true;39863;MONTH;false;recontextualize Beauty;6
+7;2022-01-12T05:17:21;DRIVER;2022-01-12T10:15:48;40408;optical as;protocol online;false;38859;YEAR;false;Money Trace;7
+8;2022-01-12T07:16:26;TAXI;2022-01-12T06:02:52;31578;bus Refined District;withdrawal;false;38570;YEAR;false;Plastic boliviano Buckinghamshire;8
+9;2022-01-12T04:07:46;DRIVER;2022-01-11T15:09:36;82678;structure cross-platform;deposit Intelligent;true;82709;YEAR;true;distributed e-business;9
+10;2022-01-11T16:24:54;TAXI;2022-01-12T01:52:08;27436;Account;Associate Ergonomic;true;43788;WEEK;false;repurpose Iraq application;10
